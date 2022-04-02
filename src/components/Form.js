@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { DateTime } from 'luxon';
 import { Calendar } from 'primereact/calendar';
 import { SelectButton } from 'primereact/selectbutton';
 import { InputNumber } from 'primereact/inputnumber';
@@ -15,7 +16,7 @@ const Form = () => {
     const dispatch = useDispatch();
 
     const addStatusPoints = () => {
-        dispatch(addStatusPointsRequest({ date: date.toISOString(), type, points }));
+        dispatch(addStatusPointsRequest({ date, type, points }));
         clearForm();
     };
 
@@ -31,7 +32,7 @@ const Form = () => {
         <div className="grid align-items-center">
             <div className="p-fluid col-12 md:col-2">
                 <span className="p-float-label">
-                    <Calendar id="date" dateFormat="dd M yy" value={date} onChange={({ value }) => setDate(value)} />
+                    <Calendar id="date" dateFormat="dd M yy" value={date} onChange={({ value }) => setDate(DateTime.fromJSDate(value))} />
                     <label htmlFor="date">Date</label>
                 </span>
             </div>
