@@ -1,18 +1,25 @@
 import { useSelector } from 'react-redux';
+import { DateTime, Interval } from 'luxon';
+
 import { Card } from 'primereact/card';
 import { Knob } from 'primereact/knob';
 
 const TypeSummary = () => {
     const statusPoints = useSelector(state => state.statusPoints.statusPoints);
 
-    const totalPoints = statusPoints.map(({ points }) => points)
+    const startOfToday = DateTime.now().startOf("day");
+    const lastTwelveMonths = Interval.fromDateTimes(startOfToday.minus({ months: 12 }), startOfToday);
+
+    const filteredStatusPoints = statusPoints.filter(({ date }) => lastTwelveMonths.contains(date));
+
+    const totalPoints = filteredStatusPoints.map(({ points }) => points)
         .reduce((acc, val) => acc + val, 0);
 
-    const flightsPoints = statusPoints.filter(({ type }) => type === "Flight")
+    const flightsPoints = filteredStatusPoints.filter(({ type }) => type === "Flight")
         .map(({ points }) => points)
         .reduce((acc, val) => acc + val, 0);
 
-    const value = (flightsPoints / totalPoints) * 100;
+    const value = totalPoints === 0 ? 0 : (flightsPoints / totalPoints) * 100;
 
     return (
         <Card>

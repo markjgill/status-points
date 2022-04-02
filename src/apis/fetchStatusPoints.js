@@ -24,7 +24,10 @@ const data = [
     { date: "2022-01-29", type: "Flight", points: 11 },
     { date: "2022-02-05", type: "Flight", points: 4 },
     { date: "2022-02-23", type: "Card", points: 14.9 },
-    { date: "2022-03-23", type: "Card", points: 21.68 }
+    { date: "2022-03-23", type: "Card", points: 21.68 },
+    { date: "2022-04-13", type: "Flight", points: 7 },
+    { date: "2022-07-23", type: "Flight", points: 169 },
+    { date: "2022-08-07", type: "Flight", points: 99 }
 ];
 
 const fetchStatusPoints = fromDate =>
