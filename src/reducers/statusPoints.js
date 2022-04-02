@@ -9,7 +9,7 @@ const statusPointsSlice = createSlice({
         statusPoints: []
     },
     reducers: {
-        addStatusPointsRequest: (stae, action) => {},
+        addStatusPointsRequest: (state, action) => {},
         addStatusPointsSuccess: (state, action) => {
             state.statusPoints = sortByDate(append(action.payload, state.statusPoints));
         },
