@@ -12,7 +12,7 @@ const data = [
     { date: "2021-06-23", type: "Card", points: 17.95 },
     { date: "2021-06-24", type: "Flight", points: 8 },
     { date: "2021-07-23", type: "Card", points: 21.93 },
-    { dste: "2021-08-23", type: "Card", points: 12.23 },
+    { date: "2021-08-23", type: "Card", points: 12.23 },
     { date: "2021-09-23", type: "Card", points: 9.42 },
     { date: "2021-10-22", type: "Card", points: 4.23 },
     { date: "2021-12-09", type: "Card", points: 6.01 },
@@ -27,7 +27,8 @@ const data = [
     { date: "2022-03-23", type: "Card", points: 21.68 }
 ];
 
-const fetchStatusPoints = () =>
-    data.map(({ date, type, points }) => ({ date: DateTime.fromISO(date), type, points }));
+const fetchStatusPoints = fromDate =>
+    data.map(({ date, type, points }) => ({ date: DateTime.fromISO(date), type, points }))
+        .filter(({ date }) => date >= fromDate);
 
 export default fetchStatusPoints;
