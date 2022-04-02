@@ -5,7 +5,7 @@ import { SelectButton } from 'primereact/selectbutton';
 import { InputNumber } from 'primereact/inputnumber';
 import { Button } from 'primereact/button';
 
-import { add } from '../reducers/statusPoints';
+import { addStatusPointsRequest } from '../reducers/statusPoints';
 
 const Form = () => {
     const [date, setDate] = useState(null);
@@ -15,7 +15,7 @@ const Form = () => {
     const dispatch = useDispatch();
 
     const addStatusPoints = () => {
-        dispatch(add({ date: date.toISOString(), type, points }));
+        dispatch(addStatusPointsRequest({ date: date.toISOString(), type, points }));
         clearForm();
     };
 

@@ -1,18 +1,33 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-const counterSlice = createSlice({
+const statusPointsSlice = createSlice({
     name: 'status-points',
     initialState: {
-        value: [],
+        statusPoints: [],
     },
     reducers: {
-        add: (state, action) => {
-            state.value.push(action.payload);
+        addStatusPointsRequest: (stae, action) => {},
+        addStatusPointsSuccess: (state, action) => {
+            state.statusPoints.push(action.payload);
+        },
+        fetchStatusPointsRequest: (state, action) => {},
+        fetchStatusPointsSuccess: (state, action) => {
+            state.statusPoints = action.payload;
         }
     }
 });
 
-const { add } = counterSlice.actions;
+const {
+    addStatusPointsRequest,
+    addStatusPointsSuccess,
+    fetchStatusPointsRequest,
+    fetchStatusPointsSuccess
+} = statusPointsSlice.actions;
 
-export { counterSlice, add };
-export default counterSlice.reducer;
+export {
+    addStatusPointsRequest,
+    addStatusPointsSuccess,
+    fetchStatusPointsRequest,
+    fetchStatusPointsSuccess
+};
+export default statusPointsSlice.reducer;

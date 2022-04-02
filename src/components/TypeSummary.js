@@ -3,7 +3,7 @@ import { Card } from 'primereact/card';
 import { Knob } from 'primereact/knob';
 
 const TypeSummary = () => {
-    const statusPoints = useSelector(state => state.statusPoints.value);
+    const statusPoints = useSelector(state => state.statusPoints.statusPoints);
 
     const totalPoints = statusPoints.map(({ points }) => points)
         .reduce((acc, val) => acc + val, 0);
