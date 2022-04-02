@@ -1,18 +1,21 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { append, sortBy, prop } from 'ramda';
+
+const sortByDate = sortBy(prop("date"));
 
 const statusPointsSlice = createSlice({
     name: 'status-points',
     initialState: {
-        statusPoints: [],
+        statusPoints: []
     },
     reducers: {
         addStatusPointsRequest: (stae, action) => {},
         addStatusPointsSuccess: (state, action) => {
-            state.statusPoints.push(action.payload);
+            state.statusPoints = sortByDate(append(action.payload, state.statusPoints));
         },
         fetchStatusPointsRequest: (state, action) => {},
         fetchStatusPointsSuccess: (state, action) => {
-            state.statusPoints = action.payload;
+            state.statusPoints = sortByDate(action.payload);
         }
     }
 });
