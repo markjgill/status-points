@@ -1,5 +1,6 @@
-import { DateTime, Interval } from 'luxon';
 import { useSelector } from 'react-redux';
+import { DateTime, Interval } from 'luxon';
+import { add, compose, groupBy, keys, map, mapObjIndexed, prop, reduce, values } from 'ramda';
 import { Card } from 'primereact/card';
 import { Chart } from 'primereact/chart';
 
@@ -9,23 +10,26 @@ const PointsChart = () => {
     const startOfToday = DateTime.now().startOf("day");
     const lastTwelveMonths = Interval.fromDateTimes(startOfToday.minus({ months: 12 }), startOfToday);
 
-    const colorOptions = {
-        Flight: {
-            outsideRange: "rgb(0, 255, 0, 0.2)",
-            insideRange: "rgb(0, 255, 0, 1.0)"
-        },
-        Card: {
-            outsideRange: "rgb(255, 0, 0, 0.2)",
-            insideRange: "rgb(255, 0, 0, 1.0)"
-        }
-    };
+    const statusPointsByDate = compose(
+        mapObjIndexed(value => ({
+            opacity: lastTwelveMonths.contains(value[0].date) ? 1.0 : 0.25,
+            ...groupBy(prop("type"), value)
+        })),
+        groupBy(({ date }) => date.toLocaleString(DateTime.DATE_MED))
+    )(statusPoints);
 
     const data = {
-        labels: statusPoints.map(({ date }) => date.toLocaleString(DateTime.DATE_MED)),
+        labels: keys(statusPointsByDate),
         datasets: [
             {
-                backgroundColor: statusPoints.map(({ date, type }) => colorOptions[type][lastTwelveMonths.contains(date) ? "insideRange" : "outsideRange"]),
-                data: statusPoints.map(({ points }) => points)
+                backgroundColor: values(mapObjIndexed(({ opacity }) => `rgb(0, 255, 0, ${opacity})`, statusPointsByDate)),
+                data: mapObjIndexed(({ Flight = [] }) => reduce(add, 0, map(prop("points"), Flight)), statusPointsByDate)
+
+            },
+            {
+                backgroundColor: values(mapObjIndexed(({ opacity }) => `rgb(255, 0, 0, ${opacity})`, statusPointsByDate)),
+                data: mapObjIndexed(({ Card = [] }) => reduce(add, 0, map(prop("points"), Card)), statusPointsByDate)
+
             }
         ]
     };
@@ -36,6 +40,14 @@ const PointsChart = () => {
         plugins: {
             legend: {
                 display: false
+            }
+        },
+        scales: {
+            x: {
+                stacked: true
+            },
+            y: {
+                stacked: true
             }
         }
     };
