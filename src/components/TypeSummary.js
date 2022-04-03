@@ -21,7 +21,7 @@ const TypeSummary = () => {
     const value = totalPoints === 0 ? 0 : (flightsPoints / totalPoints) * 100;
 
     return (
-        <Card>
+        <Card className="border-1">
             <div className="flex flex-column">
                 <h2 className="flex justify-content-center">Flights vs Card</h2>
                 <div className="flex justify-content-center">

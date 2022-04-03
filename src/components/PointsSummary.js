@@ -15,7 +15,7 @@ const PointsSummary = () => {
         .reduce((acc, val) => acc + val, 0);
 
     return (
-        <Card>
+        <Card className="border-1">
             <div className="flex flex-column">
                 <h2 className="flex justify-content-center">Points Summary</h2>
                 <div className="flex justify-content-center">
