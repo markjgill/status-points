@@ -6,8 +6,8 @@ import { Knob } from 'primereact/knob';
 const TypeSummary = () => {
     const statusPoints = useSelector(state => state.statusPoints.statusPoints);
 
-    const startOfToday = DateTime.now().startOf("day");
-    const lastTwelveMonths = Interval.fromDateTimes(startOfToday.minus({ months: 12 }), startOfToday);
+    const endOfToday = DateTime.now().endOf("day");
+    const lastTwelveMonths = Interval.fromDateTimes(endOfToday.minus({ months: 12 }), endOfToday);
 
     const filteredStatusPoints = statusPoints.filter(({ date }) => lastTwelveMonths.contains(date));
 
