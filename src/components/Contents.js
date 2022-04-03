@@ -7,9 +7,6 @@ import Message from "./Message";
 const Contents = () => (
     <div className="px-3 pt-3">
         <div className="grid">
-        <div className="col-12 md:hidden">
-                <PointsTable />
-            </div>
             <div className="col-12 md:col-2">
                 <div className="grid">
                     <div className="col-12">

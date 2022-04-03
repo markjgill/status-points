@@ -30,13 +30,13 @@ const Form = () => {
 
     return (
         <div className="grid align-items-center">
-            <div className="p-fluid col-12 md:col-1">
+            <div className="p-fluid col-12 md:col-2">
                 <span className="p-float-label">
                     <Calendar id="date" dateFormat="dd M yy" value={date} onChange={({ value }) => setDate(DateTime.fromJSDate(value))} />
                     <label htmlFor="date">Date</label>
                 </span>
             </div>
-            <div className="p-fluid col-12 md:col-1">
+            <div className="p-fluid col-12 md:col-2">
                 <span className="p-float-label">
                     <InputNumber id="points" inputId="minmaxfraction" mode="decimal" minFractionDigits={0} maxFractionDigits={2} value={points} onValueChange={({ value }) => setPoints(value)} />
                     <label htmlFor="points">Points</label>
