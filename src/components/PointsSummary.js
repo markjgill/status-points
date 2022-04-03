@@ -1,9 +1,12 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { DateTime, Interval } from 'luxon';
 import { Card } from 'primereact/card';
 import { Knob } from 'primereact/knob';
 
+import { setCurrentPoints } from '../reducers/statusPoints';
+
 const PointsSummary = () => {
+    const dispatch = useDispatch();
     const statusPoints = useSelector(state => state.statusPoints.statusPoints);
 
     const endOfToday = DateTime.now().endOf("day");
@@ -13,6 +16,8 @@ const PointsSummary = () => {
 
     const totalPoints = filteredStatusPoints.map(({ points }) => points)
         .reduce((acc, val) => acc + val, 0);
+
+    dispatch(setCurrentPoints(totalPoints));
 
     return (
         <Card className="border-1">

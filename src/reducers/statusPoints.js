@@ -6,7 +6,8 @@ const sortByDate = sortBy(prop("date"));
 const statusPointsSlice = createSlice({
     name: 'status-points',
     initialState: {
-        statusPoints: []
+        statusPoints: [],
+        currentPoints: 0
     },
     reducers: {
         addStatusPointsRequest: (state, action) => {},
@@ -16,6 +17,9 @@ const statusPointsSlice = createSlice({
         fetchStatusPointsRequest: (state, action) => {},
         fetchStatusPointsSuccess: (state, action) => {
             state.statusPoints = sortByDate(action.payload);
+        },
+        setCurrentPoints: (state, action) => {
+            state.currentPoints = action.payload;
         }
     }
 });
@@ -24,13 +28,15 @@ const {
     addStatusPointsRequest,
     addStatusPointsSuccess,
     fetchStatusPointsRequest,
-    fetchStatusPointsSuccess
+    fetchStatusPointsSuccess,
+    setCurrentPoints
 } = statusPointsSlice.actions;
 
 export {
     addStatusPointsRequest,
     addStatusPointsSuccess,
     fetchStatusPointsRequest,
-    fetchStatusPointsSuccess
+    fetchStatusPointsSuccess,
+    setCurrentPoints
 };
 export default statusPointsSlice.reducer;
