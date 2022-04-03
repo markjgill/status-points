@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { DateTime, Interval } from 'luxon';
 import { Card } from 'primereact/card';
@@ -17,7 +18,7 @@ const PointsSummary = () => {
     const totalPoints = filteredStatusPoints.map(({ points }) => points)
         .reduce((acc, val) => acc + val, 0);
 
-    dispatch(setCurrentPoints(totalPoints));
+    useEffect(() => dispatch(setCurrentPoints(totalPoints)));
 
     return (
         <Card className="border-1">
