@@ -1,11 +1,15 @@
 import TypeSummary from "./TypeSummary";
 import PointsSummary from './PointsSummary';
 import PointsChart from './PointsChart';
+import PointsTable from "./PointsTable";
 import Message from "./Message";
 
 const Contents = () => (
     <div className="px-3 pt-3">
-        <div className="grid justify-content-around">
+        <div className="grid">
+        <div className="col-12 md:hidden">
+                <PointsTable />
+            </div>
             <div className="col-12 md:col-2">
                 <div className="grid">
                     <div className="col-12">
@@ -19,8 +23,11 @@ const Contents = () => (
                     </div>
                 </div>
             </div>
-            <div className="col-12 md:col-10">
+            <div className="hidden md:block md:col-10">
                 <PointsChart />
+            </div>
+            <div className="col-12 md:hidden">
+                <PointsTable />
             </div>
         </div>
     </div>
