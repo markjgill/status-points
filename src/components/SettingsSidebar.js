@@ -4,7 +4,7 @@ import { Sidebar } from 'primereact/sidebar';
 import { InputNumber } from 'primereact/inputnumber';
 import { Button } from 'primereact/button';
 
-import { sidebarVisibility } from '../reducers/settingsSidebar';
+import { sidebarVisibility, updateSettings } from '../reducers/settingsSidebar';
 
 const SettingsSidebar = () => {
     const [pointsForSilver, setPointsForSilver] = useState();
@@ -26,11 +26,15 @@ const SettingsSidebar = () => {
         dispatch(sidebarVisibility(false));
     };
 
+    const saveSettings = () => {
+        dispatch(updateSettings({ pointsForSilver, pointsForGold, percentDiscount }));
+    };
+
     return (
         <Sidebar visible={visible} position="right" onHide={hideSidebar}>
-            <div className="flex flex-column justify-content-between h-full">
-                <div>
-                    <h2>Settings</h2>
+            <div className="flex flex-column h-full">
+                <h2>Settings</h2>
+                <div className="flex-auto">
                     <div className="field">
                         <label htmlFor="pointsForSilver">Points to achieve Silver Status</label>
                         <InputNumber className="w-full" value={pointsForSilver} onValueChange={({ value }) => setPointsForSilver(value)} />
@@ -44,7 +48,7 @@ const SettingsSidebar = () => {
                         <InputNumber className="w-full" value={percentDiscount} suffix="%" onValueChange={({ value }) => setPercentDiscount(value)} />
                     </div>
                 </div>
-                <Button className="field" label="Save" />
+                <Button className="field" label="Save" onClick={saveSettings}/>
             </div>
         </Sidebar>
     )
