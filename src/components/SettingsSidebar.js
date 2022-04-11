@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Sidebar } from 'primereact/sidebar';
 import { InputNumber } from 'primereact/inputnumber';
@@ -7,13 +7,20 @@ import { Button } from 'primereact/button';
 import { sidebarVisibility } from '../reducers/settingsSidebar';
 
 const SettingsSidebar = () => {
-    const dispatch = useDispatch();
+    const [pointsForSilver, setPointsForSilver] = useState();
+    const [pointsForGold, setPointsForGold] = useState();
+    const [percentDiscount, setPercentDiscount] = useState();
+
     const visible = useSelector(state => state.settingsSidebar.visible);
     const settings = useSelector(state => state.settingsSidebar.settings);
 
-    const [pointsForSilver, setPointsForSilver] = useState(settings.pointsForSilver);
-    const [pointsForGold, setPointsForGold] = useState(settings.pointsForGold);
-    const [percentDiscount, setPercentDiscount] = useState(settings.percentDiscount);
+    useEffect(() => {
+        setPointsForSilver(settings.pointsForSilver);
+        setPointsForGold(settings.pointsForGold);
+        setPercentDiscount(settings.percentDiscount);
+    }, [settings]);
+
+    const dispatch = useDispatch();
 
     const hideSidebar = () => {
         dispatch(sidebarVisibility(false));
