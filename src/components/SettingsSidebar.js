@@ -7,18 +7,18 @@ import { Button } from 'primereact/button';
 import { sidebarVisibility, updateSettings } from '../reducers/settingsSidebar';
 
 const SettingsSidebar = () => {
-    const [pointsForSilver, setPointsForSilver] = useState();
-    const [pointsForGold, setPointsForGold] = useState();
-    const [percentDiscount, setPercentDiscount] = useState();
+    const [silver, setSilver] = useState();
+    const [gold, setGold] = useState();
+    const [elite, setElite] = useState();
 
     const visible = useSelector(state => state.settingsSidebar.visible);
-    const settings = useSelector(state => state.settingsSidebar.settings);
+    const points = useSelector(state => state.settingsSidebar.settings.points);
 
     useEffect(() => {
-        setPointsForSilver(settings.pointsForSilver);
-        setPointsForGold(settings.pointsForGold);
-        setPercentDiscount(settings.percentDiscount);
-    }, [settings]);
+        setSilver(points.silver);
+        setGold(points.gold);
+        setElite(points.elite);
+    }, [points]);
 
     const dispatch = useDispatch();
 
@@ -27,7 +27,7 @@ const SettingsSidebar = () => {
     };
 
     const saveSettings = () => {
-        dispatch(updateSettings({ pointsForSilver, pointsForGold, percentDiscount }));
+        dispatch(updateSettings({ points: { silver, gold, elite } }));
     };
 
     return (
@@ -36,16 +36,16 @@ const SettingsSidebar = () => {
                 <h2>Settings</h2>
                 <div className="flex-auto">
                     <div className="field">
-                        <label htmlFor="pointsForSilver">Points to achieve Silver Status</label>
-                        <InputNumber className="w-full" value={pointsForSilver} onValueChange={({ value }) => setPointsForSilver(value)} />
+                        <label htmlFor="silver">Points to achieve Silver Status</label>
+                        <InputNumber id="silver" className="w-full" value={silver} onValueChange={({ value }) => setSilver(value)} />
                     </div>
                     <div className="field">
-                        <label htmlFor="pointsForGold">Points to acheive Gold Status</label>
-                        <InputNumber className="w-full" value={pointsForGold} onValueChange={({ value }) => setPointsForGold(value)} />
+                        <label htmlFor="gold">Points to achieve Gold Status</label>
+                        <InputNumber id="gold" className="w-full" value={gold} onValueChange={({ value }) => setGold(value)} />
                     </div>
                     <div className="field">
-                        <label htmlFor="percentDiscount">Percentage Discount to retain status</label>
-                        <InputNumber className="w-full" value={percentDiscount} suffix="%" onValueChange={({ value }) => setPercentDiscount(value)} />
+                        <label htmlFor="elite">Points to achieve Elite Status</label>
+                        <InputNumber id="elite" className="w-full" value={elite} onValueChange={({ value }) => setElite(value)} />
                     </div>
                 </div>
                 <Button className="field" label="Save" onClick={saveSettings}/>

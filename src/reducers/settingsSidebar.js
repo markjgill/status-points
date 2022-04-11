@@ -4,7 +4,9 @@ const settingsSidebarSlice = createSlice({
     name: 'settings',
     initialState: {
         visible: false,
-        settings: {}
+        settings: {
+            points: {}
+        }
     },
     reducers: { 
         sidebarVisibility: (state, action) => {
@@ -15,7 +17,7 @@ const settingsSidebarSlice = createSlice({
             state.settings = action.payload;
         },
         updateSettings: (state, action) => {
-            state.settings = action.payload;
+            state.settings = { ...state.settings, ...action.payload };
         }
     }
 });

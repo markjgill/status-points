@@ -1,7 +1,10 @@
 const data = {
-    pointsForSilver: 450,
-    pointsForGold: 900,
-    percentDiscount: 10
+    tier: "none",
+    points: {
+        "silver": 450,
+        "gold": 900,
+        "elite": 1500
+    }
 };
 
 const fetchSettings = () => data;
