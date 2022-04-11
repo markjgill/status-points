@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 
 import Header from './components/Header';
 import Contents from './components/Contents';
+import SettingsSidebar from './components/SettingsSidebar';
 import { fetchStatusPointsRequest } from './reducers/statusPoints';
 
 const App = () => {
@@ -13,6 +14,7 @@ const App = () => {
     <>
       <Header />
       <Contents />
+      <SettingsSidebar />
     </>
   );
 };
