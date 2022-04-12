@@ -1,8 +1,8 @@
 import { useDispatch } from 'react-redux';
 import { Button } from "primereact/button";
 
-import { sidebarVisibility } from '../reducers/settingsSidebar';
 import Form from "./Form";
+import { sidebarVisibility } from '../reducers/settings';
 
 const Header = () => {
     const dispatch = useDispatch();

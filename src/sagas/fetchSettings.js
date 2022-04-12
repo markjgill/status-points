@@ -1,7 +1,7 @@
 import { call, put, takeLatest } from 'redux-saga/effects'
 
 import fetchSettings from '../apis/fetchSettings';
-import { fetchSettingsRequest, fetchSettingsSuccess } from '../reducers/settingsSidebar';
+import { fetchSettingsRequest, fetchSettingsSuccess } from '../reducers/settings';
 
 const fetch = function* (action) {
     try {

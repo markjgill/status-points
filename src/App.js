@@ -5,7 +5,7 @@ import Header from './components/Header';
 import Contents from './components/Contents';
 import SettingsSidebar from './components/SettingsSidebar';
 import { fetchStatusPointsRequest } from './reducers/statusPoints';
-import { fetchSettingsRequest } from './reducers/settingsSidebar';
+import { fetchSettingsRequest } from './reducers/settings';
 
 const App = () => {
   const dispatch = useDispatch();

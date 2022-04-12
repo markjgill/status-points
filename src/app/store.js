@@ -2,7 +2,7 @@ import createSagaMiddleware from 'redux-saga'
 import { configureStore } from '@reduxjs/toolkit'
 
 import statusPointsReducer from '../reducers/statusPoints';
-import settingsSidebarReducer from '../reducers/settingsSidebar';
+import settingsReducer from '../reducers/settings';
 import rootSaga from '../sagas/rootSaga';
 
 const sagaMiddleware = createSagaMiddleware()
@@ -10,7 +10,7 @@ const sagaMiddleware = createSagaMiddleware()
 const store = configureStore({
     reducer: {
         statusPoints: statusPointsReducer,
-        settingsSidebar: settingsSidebarReducer
+        settings: settingsReducer
     },
     middleware: [sagaMiddleware]
 });

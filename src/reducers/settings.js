@@ -1,11 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-const settingsSidebarSlice = createSlice({
+const settingsSlice = createSlice({
     name: 'settings',
     initialState: {
         visible: false,
-        settings: {
-            points: {}
+        currentTier: undefined,
+        points: {
+            silver: undefined,
+            gold: undefined,
+            elite: undefined
         }
     },
     reducers: { 
@@ -14,10 +17,14 @@ const settingsSidebarSlice = createSlice({
         },
         fetchSettingsRequest: (state, action) => {},
         fetchSettingsSuccess: (state, action) => {
-            state.settings = action.payload;
+            const { tier, points } = action.payload;
+            state.currentTier = tier;
+            state.points = points;
         },
         updateSettings: (state, action) => {
-            state.settings = { ...state.settings, ...action.payload };
+            const { tier, silver, gold, elite } = action.payload;
+            state.currentTier = tier;
+            state.points = { silver, gold, elite };
         }
     }
 });
@@ -27,7 +34,7 @@ const {
     fetchSettingsRequest,
     fetchSettingsSuccess,
     updateSettings
-} = settingsSidebarSlice.actions;
+} = settingsSlice.actions;
 
 export {
     sidebarVisibility,
@@ -35,4 +42,4 @@ export {
     fetchSettingsSuccess,
     updateSettings
 };
-export default settingsSidebarSlice.reducer;
+export default settingsSlice.reducer;

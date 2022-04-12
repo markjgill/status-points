@@ -2,23 +2,25 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Sidebar } from 'primereact/sidebar';
 import { InputNumber } from 'primereact/inputnumber';
+import { Dropdown } from 'primereact/dropdown';
 import { Button } from 'primereact/button';
 
-import { sidebarVisibility, updateSettings } from '../reducers/settingsSidebar';
+import { sidebarVisibility, updateSettings } from '../reducers/settings';
 
 const SettingsSidebar = () => {
     const [silver, setSilver] = useState();
     const [gold, setGold] = useState();
     const [elite, setElite] = useState();
+    const [tier, setTier] = useState();
 
-    const visible = useSelector(state => state.settingsSidebar.visible);
-    const points = useSelector(state => state.settingsSidebar.settings.points);
+    const { visible, currentTier, points } = useSelector(state => state.settings);
 
     useEffect(() => {
         setSilver(points.silver);
         setGold(points.gold);
         setElite(points.elite);
-    }, [points]);
+        setTier(currentTier);
+    }, [points, currentTier]);
 
     const dispatch = useDispatch();
 
@@ -27,8 +29,15 @@ const SettingsSidebar = () => {
     };
 
     const saveSettings = () => {
-        dispatch(updateSettings({ points: { silver, gold, elite } }));
+        dispatch(updateSettings({ tier, silver, gold, elite }));
     };
+
+    const tierOptions = [
+        { label: "None", value: "none" },
+        { label: "Silver", value: "silver" },
+        { label: "Gold", value: "gold" },
+        { label: "Elite", value: "elite" }
+    ];
 
     return (
         <Sidebar visible={visible} position="right" onHide={hideSidebar}>
@@ -46,6 +55,10 @@ const SettingsSidebar = () => {
                     <div className="field">
                         <label htmlFor="elite">Points to achieve Elite Status</label>
                         <InputNumber id="elite" className="w-full" value={elite} onValueChange={({ value }) => setElite(value)} />
+                    </div>
+                    <div className="field">
+                        <label htmlFor="tier">Current Tier</label>
+                        <Dropdown id="tier" className="w-full" value={tier} options={tierOptions} onChange={({ value }) => setTier(value)} />
                     </div>
                 </div>
                 <Button className="field" label="Save" onClick={saveSettings}/>
