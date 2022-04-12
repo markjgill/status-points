@@ -30,6 +30,7 @@ const SettingsSidebar = () => {
 
     const saveSettings = () => {
         dispatch(updateSettings({ tier, silver, gold, elite }));
+        hideSidebar();
     };
 
     const tierOptions = [
