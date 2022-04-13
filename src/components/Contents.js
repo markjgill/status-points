@@ -5,19 +5,23 @@ import PointsTable from "./PointsTable";
 import Message from "./Message";
 
 const Contents = () => (
-    <div className="px-3 pt-3">
-        <div className="grid">
-            <div className="col-12 md:col-2 flex flex-column justify-content-between">
+    <div className="flex flex-column md:flex-row mx-1">
+        <div className="flex flex-column justify-content-between">
+            <div className="m-2">
                 <Message />
+            </div>
+            <div className="m-2">
                 <PointsSummary />
+            </div>
+            <div className="m-2">
                 <TypeSummary />
             </div>
-            <div className="hidden md:block md:col-10">
-                <PointsChart />
-            </div>
-            <div className="col-12 md:hidden">
-                <PointsTable />
-            </div>
+        </div>
+        <div className="flex-auto m-2 hidden md:block">
+            <PointsChart />
+        </div>
+        <div className="m-2 md:hidden">
+            <PointsTable />
         </div>
     </div>
 );
