@@ -16,7 +16,7 @@ const Message = () => {
 
     return (
         <Card className="border-1 bg-green-200">
-            <h4 className="m-0 text-center">You are {points - currentPoints.toFixed(0)} points away from {tier} status</h4>
+            <h4 className="m-0 text-center">You are {points - Math.trunc(currentPoints)} points away from {tier} status</h4>
         </Card>
    );
 };
