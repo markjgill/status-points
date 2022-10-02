@@ -6,7 +6,7 @@ import { fetchStatusPointsRequest, fetchStatusPointsSuccess } from '../reducers/
 
 const fetch = function* (action) {
     try {
-        const fromDate = DateTime.now().startOf("day").minus({ months: 18 });
+        const fromDate = DateTime.now().startOf("day").minus({ months: 15 });
         const statusPoints = yield call(fetchStatusPoints, fromDate);
         yield put(fetchStatusPointsSuccess(statusPoints));
     } catch (e) {
