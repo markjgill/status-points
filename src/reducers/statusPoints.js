@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { DateTime } from 'luxon';
 import { append, sortBy, prop } from 'ramda';
 
 const sortByDate = sortBy(prop("date"));
@@ -8,7 +9,8 @@ const statusPointsSlice = createSlice({
     initialState: {
         statusPoints: [],
         currentPoints: 0,
-        currentTier: "none"
+        currentTier: "none",
+        tierReachedDate: DateTime.fromMillis(0)
     },
     reducers: {
         addStatusPointsRequest: (state, action) => {},
@@ -24,6 +26,9 @@ const statusPointsSlice = createSlice({
         },
         setCurrentTier: (state, action) => {
             state.currentTier = action.payload;
+        },
+        setTierReachedDate: (state, action) => {
+            state.tierReachedDate = action.payload;
         }
     }
 });
@@ -34,7 +39,8 @@ const {
     fetchStatusPointsRequest,
     fetchStatusPointsSuccess,
     setCurrentPoints,
-    setCurrentTier
+    setCurrentTier,
+    setTierReachedDate
 } = statusPointsSlice.actions;
 
 export {
@@ -43,6 +49,7 @@ export {
     fetchStatusPointsRequest,
     fetchStatusPointsSuccess,
     setCurrentPoints,
-    setCurrentTier
+    setCurrentTier,
+    setTierReachedDate
 };
 export default statusPointsSlice.reducer;
