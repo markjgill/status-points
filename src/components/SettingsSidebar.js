@@ -60,7 +60,7 @@ const SettingsSidebar = () => {
                         <InputNumber id="elite" className="w-full" value={elite} onValueChange={({ value }) => setElite(value)} />
                     </div>
                     <div className="field">
-                        <lavel htmlFor="retention">Percentage of points to retain tier</lavel>
+                        <label htmlFor="retention">Percentage of points to retain tier</label>
                         <InputNumber id="retention" className="w-full" value={tierRetention} suffix="%" onValueChange={({ value }) => setTierRetention(value)} />
                     </div>
                     <div className="field">
