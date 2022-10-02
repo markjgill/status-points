@@ -26,8 +26,25 @@ const data = [
     { date: "2022-02-23", type: "Card", points: 14.9 },
     { date: "2022-03-23", type: "Card", points: 21.68 },
     { date: "2022-04-13", type: "Flight", points: 7 },
-    { date: "2022-07-23", type: "Flight", points: 169 },
-    { date: "2022-08-07", type: "Flight", points: 99 }
+    { date: "2022-04-23", type: "Card", points: 8.81 },
+    { date: "2022-05-23", type: "Card", points: 5.64 },
+    { date: "2022-06-23", type: "Card", points: 30.60 },
+    { date: "2022-07-22", type: "Card", points: 9.11 },
+    { date: "2022-07-23", type: "Flight", points: 114 },
+    { date: "2022-07-25", type: "Flight", points: 55 },
+    { date: "2022-08-08", type: "Flight", points: 64 },
+    { date: "2022-08-09", type: "Flight", points: 35 },
+    { date: "2022-08-23", type: "Card", points: 7.51 },
+    { date: "2022-09-23", type: "Card", points: 6.35 },
+    { date: "2022-10-22", type: "Flight", points: 4 },
+    { date: "2022-10-24", type: "Flight", points: 8 },
+    { date: "2022-12-23", type: "Flight", points: 6 },
+    { date: "2022-12-24", type: "Flight", points: 40 },
+    { date: "2023-01-03", type: "Flight", points: 40 },
+    { date: "2023-01-04", type: "Flight", points: 25 },
+    { date: "2023-01-07", type: "Flight", points: 81 },
+    { date: "2023-01-28", type: "Flight", points: 8 },
+    { date: "2023-02-06", type: "Flight", points: 8 }
 ];
 
 const fetchStatusPoints = fromDate =>
