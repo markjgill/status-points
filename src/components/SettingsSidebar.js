@@ -11,16 +11,18 @@ const SettingsSidebar = () => {
     const [silver, setSilver] = useState();
     const [gold, setGold] = useState();
     const [elite, setElite] = useState();
+    const [tierRetention, setTierRetention] = useState();
     const [tier, setTier] = useState();
 
-    const { visible, currentTier, points } = useSelector(state => state.settings);
+    const { visible, currentTier, retention, points } = useSelector(state => state.settings);
 
     useEffect(() => {
         setSilver(points.silver);
         setGold(points.gold);
         setElite(points.elite);
+        setTierRetention(retention);
         setTier(currentTier);
-    }, [points, currentTier]);
+    }, [points, retention, currentTier]);
 
     const dispatch = useDispatch();
 
@@ -29,7 +31,7 @@ const SettingsSidebar = () => {
     };
 
     const saveSettings = () => {
-        dispatch(updateSettings({ tier, silver, gold, elite }));
+        dispatch(updateSettings({ tier, tierRetention, silver, gold, elite }));
         hideSidebar();
     };
 
@@ -56,6 +58,10 @@ const SettingsSidebar = () => {
                     <div className="field">
                         <label htmlFor="elite">Points to achieve Elite Status</label>
                         <InputNumber id="elite" className="w-full" value={elite} onValueChange={({ value }) => setElite(value)} />
+                    </div>
+                    <div className="field">
+                        <lavel htmlFor="retention">Percentage of points to retain tier</lavel>
+                        <InputNumber id="retention" className="w-full" value={tierRetention} suffix="%" onValueChange={({ value }) => setTierRetention(value)} />
                     </div>
                     <div className="field">
                         <label htmlFor="tier">Current Tier</label>
