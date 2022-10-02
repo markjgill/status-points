@@ -6,8 +6,14 @@ import { always, compose, cond, defaultTo, find, gte, map, prop, pluck, T, __ } 
 import Header from './components/Header';
 import Contents from './components/Contents';
 import SettingsSidebar from './components/SettingsSidebar';
-import { fetchStatusPointsRequest, setCurrentPoints, setCurrentTier, setTierReachedDate } from './reducers/statusPoints';
 import { fetchSettingsRequest } from './reducers/settings';
+import {
+  fetchStatusPointsRequest,
+  setCurrentPoints,
+  setCurrentTier,
+  setTierReachedDate,
+  setPointsAfterTierReached
+} from './reducers/statusPoints';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -43,6 +49,11 @@ const App = () => {
     pluck("date")
   )(statusPoints);
 
+  const tierReachedDateToToday = Interval.fromDateTimes(tierReachedDate.plus({ days: 1 }), endOfToday);
+  const pointsAfterTierReached = statusPoints.filter(({ date }) => tierReachedDateToToday.contains(date))
+    .map(({ points }) => points)
+    .reduce((acc, val) => acc + val, 0);
+
   useEffect(() => {
     dispatch(fetchSettingsRequest());
     dispatch(fetchStatusPointsRequest());
@@ -52,7 +63,8 @@ const App = () => {
     dispatch(setCurrentPoints(currentPoints));
     dispatch(setCurrentTier(currentTier));
     dispatch(setTierReachedDate(tierReachedDate));
-  }, [dispatch, currentPoints, currentTier, tierReachedDate]);
+    dispatch(setPointsAfterTierReached(pointsAfterTierReached))
+  }, [dispatch, currentPoints, currentTier, tierReachedDate, pointsAfterTierReached]);
 
   return (
     <>

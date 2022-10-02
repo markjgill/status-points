@@ -10,7 +10,8 @@ const statusPointsSlice = createSlice({
         statusPoints: [],
         currentPoints: 0,
         currentTier: "none",
-        tierReachedDate: DateTime.fromMillis(0)
+        tierReachedDate: DateTime.fromMillis(0),
+        pointsAfterTierReached: 0
     },
     reducers: {
         addStatusPointsRequest: (state, action) => {},
@@ -29,6 +30,9 @@ const statusPointsSlice = createSlice({
         },
         setTierReachedDate: (state, action) => {
             state.tierReachedDate = action.payload;
+        },
+        setPointsAfterTierReached: (state, action) => {
+            state.pointsAfterTierReached = action.payload;
         }
     }
 });
@@ -40,7 +44,8 @@ const {
     fetchStatusPointsSuccess,
     setCurrentPoints,
     setCurrentTier,
-    setTierReachedDate
+    setTierReachedDate,
+    setPointsAfterTierReached
 } = statusPointsSlice.actions;
 
 export {
@@ -50,6 +55,7 @@ export {
     fetchStatusPointsSuccess,
     setCurrentPoints,
     setCurrentTier,
-    setTierReachedDate
+    setTierReachedDate,
+    setPointsAfterTierReached
 };
 export default statusPointsSlice.reducer;
