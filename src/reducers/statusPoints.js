@@ -7,7 +7,8 @@ const statusPointsSlice = createSlice({
     name: 'status-points',
     initialState: {
         statusPoints: [],
-        currentPoints: 0
+        currentPoints: 0,
+        currentTier: "none"
     },
     reducers: {
         addStatusPointsRequest: (state, action) => {},
@@ -20,6 +21,9 @@ const statusPointsSlice = createSlice({
         },
         setCurrentPoints: (state, action) => {
             state.currentPoints = action.payload;
+        },
+        setCurrentTier: (state, action) => {
+            state.currentTier = action.payload;
         }
     }
 });
@@ -29,7 +33,8 @@ const {
     addStatusPointsSuccess,
     fetchStatusPointsRequest,
     fetchStatusPointsSuccess,
-    setCurrentPoints
+    setCurrentPoints,
+    setCurrentTier
 } = statusPointsSlice.actions;
 
 export {
@@ -37,6 +42,7 @@ export {
     addStatusPointsSuccess,
     fetchStatusPointsRequest,
     fetchStatusPointsSuccess,
-    setCurrentPoints
+    setCurrentPoints,
+    setCurrentTier
 };
 export default statusPointsSlice.reducer;

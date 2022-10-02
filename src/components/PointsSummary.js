@@ -1,24 +1,16 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { DateTime, Interval } from 'luxon';
-import { always, cond, equals, T } from 'ramda';
+import { always, cond, gte, T, __ } from 'ramda';
 import { Card } from 'primereact/card';
 import { Knob } from 'primereact/knob';
 
-import { setCurrentPoints } from '../reducers/statusPoints';
+import { setCurrentPoints, setCurrentTier } from '../reducers/statusPoints';
 
 const PointsSummary = () => {
     const dispatch = useDispatch();
     const statusPoints = useSelector(state => state.statusPoints.statusPoints);
-    const currentTier = useSelector(state => state.settings.currentTier);
     const { silver, gold, elite } = useSelector(state => state.settings.points);
-
-    const max = cond([
-        [equals("silver"), always(gold)],
-        [equals("gold"), always(elite)],
-        [equals("elite"), always(Infinity)],
-        [T, always(silver)]
-    ])(currentTier);
 
     const endOfToday = DateTime.now().endOf("day");
     const lastTwelveMonths = Interval.fromDateTimes(endOfToday.minus({ months: 12 }), endOfToday);
@@ -28,7 +20,17 @@ const PointsSummary = () => {
     const totalPoints = filteredStatusPoints.map(({ points }) => points)
         .reduce((acc, val) => acc + val, 0);
 
-    useEffect(() => dispatch(setCurrentPoints(totalPoints)));
+    const { currentTier, max } = cond([
+        [gte(__, elite), always({ currentTier: "eiite", max: Infinity })],
+        [gte(__, gold), always({ currentTier: "gold", max: elite })],
+        [gte(__, silver), always({ currentTier: "silver", max: gold })],
+        [T, always({ currentTier: "none", max: silver })]
+    ])(totalPoints);
+
+    useEffect(() => {
+        dispatch(setCurrentPoints(totalPoints));
+        dispatch(setCurrentTier(currentTier));
+    }, [dispatch, totalPoints, currentTier]);
 
     return (
         <Card className="border-1">

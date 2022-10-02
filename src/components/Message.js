@@ -4,7 +4,7 @@ import { Card } from 'primereact/card';
 
 const Message = () => {
     const currentPoints = useSelector(state => state.statusPoints.currentPoints);
-    const currentTier = useSelector(state => state.settings.currentTier);
+    const currentTier = useSelector(state => state.statusPoints.currentTier);
     const { silver, gold, elite } = useSelector(state => state.settings.points);
 
     const { tier, points } = cond([

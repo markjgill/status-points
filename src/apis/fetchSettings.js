@@ -1,5 +1,4 @@
 const data = {
-    tier: "none",
     retention: 90,
     points: {
         "silver": 450,

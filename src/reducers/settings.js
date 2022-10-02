@@ -4,7 +4,6 @@ const settingsSlice = createSlice({
     name: 'settings',
     initialState: {
         visible: false,
-        currentTier: undefined,
         retention: undefined,
         points: {
             silver: undefined,
@@ -18,14 +17,12 @@ const settingsSlice = createSlice({
         },
         fetchSettingsRequest: (state, action) => {},
         fetchSettingsSuccess: (state, action) => {
-            const { tier, retention, points } = action.payload;
-            state.currentTier = tier;
+            const { retention, points } = action.payload;
             state.retention = retention;
             state.points = points;
         },
         updateSettings: (state, action) => {
-            const { tier, tierRetention, silver, gold, elite } = action.payload;
-            state.currentTier = tier;
+            const { tierRetention, silver, gold, elite } = action.payload;
             state.retention = tierRetention;
             state.points = { silver, gold, elite };
         }
