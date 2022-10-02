@@ -1,7 +1,8 @@
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { always, cond, gte, T, __ } from 'ramda';
 import { Card } from 'primereact/card';
-import { Knob } from 'primereact/knob';
+import { ProgressBar } from 'primereact/progressbar';
 
 const PointsSummary = () => {
     const currentPoints = useSelector(state => state.statusPoints.currentPoints);
@@ -18,18 +19,27 @@ const PointsSummary = () => {
         [T, always(silver)]
     ])(currentPoints);
 
+    const nextTierPercentage = (Math.trunc(currentPoints) / nextTier) * 100;
+    const retentionPercentage = (Math.trunc(pointsAfterTierReached) / (Math.trunc(points[currentTier] * (retention / 100)))) * 100;
+
     return (
         <Card className="border-1">
             <div className="flex flex-column">
                 <h2 className="flex justify-content-center">Points Summary</h2>
-                <div className="flex justify-content-around">
-                    <Knob min={0} max={nextTier} value={Math.trunc(currentPoints)} valueColor={"rgb(255, 215, 0)"} readOnly />
-                    {
-                        currentTier !== "none"
-                            ? <Knob min={0} max={Math.trunc(points[currentTier] * (retention / 100))} value={Math.trunc(pointsAfterTierReached)} valueColor={"rgb(192, 192, 192)"} readOnly />
-                            : null
-                    }
+                <div className="m-2">
+                    <div>
+                        <ProgressBar className="h-2rem" value={nextTierPercentage} showValue={false} color="rgb(255, 215, 0)"></ProgressBar>
+                        <h4 className="m-1 text-right">{Math.trunc(currentPoints)} out of {nextTier}</h4>
+                    </div>
                 </div>
+                {
+                    currentTier !== "none"
+                        ? <div className="m-2">
+                            <ProgressBar className="h-2rem" value={retentionPercentage} showValue={false} color="rgb(150, 150, 150)"></ProgressBar>
+                            <h4 className="m-1 text-right">{Math.trunc(pointsAfterTierReached)} out of {Math.trunc(points[currentTier] * (retention / 100))}</h4>
+                          </div>
+                        : null
+                }
             </div>
         </Card>
     );
