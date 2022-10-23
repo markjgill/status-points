@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { Button } from "primereact/button";
 
-import { setAuthentication, clearAuthentication, identityProviders } from "../reducers/authentication";
+import { setAuthentication, identityProviders } from "../reducers/authentication";
 
 const Login = () => {
     const dispatch = useDispatch();
@@ -14,7 +14,7 @@ const Login = () => {
     };
 
     const guestSignIn = () => {
-        dispatch(clearAuthentication({
+        dispatch(setAuthentication({
             idToken: null,
             identityProvider: null
         }));
