@@ -1,17 +1,23 @@
 import { useDispatch } from 'react-redux';
 import { Button } from "primereact/button";
 
-import { setIdToken } from "../reducers/authentication";
+import { setAuthentication, clearAuthentication, identityProviders } from "../reducers/authentication";
 
 const Login = () => {
     const dispatch = useDispatch();
 
     window.googleSignIn = response => {
-        dispatch(setIdToken(response.credential));
+        dispatch(setAuthentication({
+            idToken: response.credential,
+            identityProvider: identityProviders.GOOGLE
+        }));
     };
 
     const guestSignIn = () => {
-        dispatch(setIdToken(null));
+        dispatch(clearAuthentication({
+            idToken: null,
+            identityProvider: null
+        }));
     };
 
     return (

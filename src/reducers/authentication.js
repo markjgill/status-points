@@ -3,25 +3,34 @@ import { createSlice } from '@reduxjs/toolkit'
 const authenticationSlice = createSlice({
     name: 'authentication',
     initialState: {
-        idToken: undefined
+        idToken: undefined,
+        identityProvider: undefined
     },
     reducers: { 
-        setIdToken: (state, action) => {
-            state.idToken = action.payload;
+        setAuthentication: (state, action) => {
+            const { idToken, identityProvider } = action.payload;
+            state.idToken = idToken;
+            state.identityProvider = identityProvider;
         },
-        clearIdToken: (state) => {
+        clearAuthentication: (state) => {
             state.idToken = undefined;
+            state.identityProvider = undefined;
         }
     }
 });
 
 const {
-    setIdToken,
-    clearIdToken
+    setAuthentication,
+    clearAuthentication
 } = authenticationSlice.actions;
 
+const identityProviders = {
+    GOOGLE: 'google'
+};
+
 export {
-    setIdToken,
-    clearIdToken
+    setAuthentication,
+    clearAuthentication,
+    identityProviders
 };
 export default authenticationSlice.reducer;
