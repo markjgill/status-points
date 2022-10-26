@@ -38,6 +38,7 @@ const data = [
     { date: "2022-09-23", type: "Card", points: 6.35 },
     { date: "2022-10-22", type: "Flight", points: 4 },
     { date: "2022-10-24", type: "Flight", points: 8 },
+    { date: "2022-10-25", type: "Card", points: 6.42 },
     { date: "2022-12-23", type: "Flight", points: 6 },
     { date: "2022-12-24", type: "Flight", points: 40 },
     { date: "2023-01-03", type: "Flight", points: 40 },
