@@ -1,12 +1,21 @@
-import { useDispatch } from 'react-redux';
+import jwtDecode from "jwt-decode";
+import { useDispatch } from "react-redux";
 import { Button } from "primereact/button";
 
 import { setAuthentication, identityProviders } from "../reducers/authentication";
+import { setUserProfile } from "../reducers/userProfile";
 
 const Login = () => {
     const dispatch = useDispatch();
 
     window.googleSignIn = response => {
+        const { given_name, email } = jwtDecode(response.credential);
+
+        dispatch(setUserProfile({
+            name: given_name,
+            email
+        }));
+
         dispatch(setAuthentication({
             idToken: response.credential,
             identityProvider: identityProviders.GOOGLE
