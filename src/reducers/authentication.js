@@ -25,7 +25,7 @@ const {
 } = authenticationSlice.actions;
 
 const identityProviders = {
-    GOOGLE: 'google'
+    GOOGLE: "accounts.google.com"
 };
 
 export {

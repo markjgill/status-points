@@ -17,9 +17,9 @@ const settingsSlice = createSlice({
         },
         fetchSettingsRequest: (state, action) => {},
         fetchSettingsSuccess: (state, action) => {
-            const { retention, points } = action.payload;
+            const { retention, silver, gold, elite } = action.payload;
             state.retention = retention;
-            state.points = points;
+            state.points = { silver, gold, elite };
         },
         updateSettings: (state, action) => {
             const { tierRetention, silver, gold, elite } = action.payload;
