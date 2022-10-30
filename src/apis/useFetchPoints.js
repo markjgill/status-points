@@ -29,7 +29,7 @@ const useFetchPoints = () => {
             }));
 
             const data = Items.map(item => unmarshall(item))
-                .map(({ earnedDate, type, points }) => ({ date: DateTime.fromISO(earnedDate), type, points }));
+                .map(({ earnedDate, type, points }) => ({ date: earnedDate, type, points }));
 
             dispatch(fetchStatusPointsSuccess(sortByDate(data)));
         })();

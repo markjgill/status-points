@@ -12,10 +12,10 @@ const PointsChart = () => {
 
     const statusPointsByDate = compose(
         mapObjIndexed(value => ({
-            opacity: lastTwelveMonths.contains(value[0].date) ? 1.0 : 0.25,
+            opacity: lastTwelveMonths.contains(DateTime.fromISO(value[0].date)) ? 1.0 : 0.25,
             ...groupBy(prop("type"), value)
         })),
-        groupBy(({ date }) => date.toLocaleString(DateTime.DATE_MED))
+        groupBy(({ date }) => DateTime.fromISO(date).toLocaleString(DateTime.DATE_MED)),
     )(statusPoints);
 
     const data = {

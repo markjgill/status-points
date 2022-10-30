@@ -10,7 +10,7 @@ const usePointsAfterTierReached = () => {
     const endOfToday = DateTime.now().endOf("day");
     const tierReachedDateToToday = Interval.fromDateTimes(tierReachedDate.plus({ days: 1 }), endOfToday);
     
-    return statusPoints.filter(({ date }) => tierReachedDateToToday.contains(date))
+    return statusPoints.filter(({ date }) => tierReachedDateToToday.contains(DateTime.fromISO(date)))
         .map(({ points }) => points)
         .reduce((acc, val) => acc + val, 0);
 };

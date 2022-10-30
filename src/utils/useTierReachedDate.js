@@ -18,10 +18,11 @@ const useTierReachedDate = () => {
           date,
           pointsToDate: statusPoints.filter(({ date: d }) =>
             Interval.fromDateTimes(date.minus({ months: 12 }), date.endOf("day"))
-              .contains(d))
+              .contains(DateTime.fromISO(d)))
               .map(({ points }) => points)
               .reduce((acc, val) => acc + val, 0)
         })),
+        map(date => DateTime.fromISO(date)),
         pluck("date")
     )(statusPoints);
 };
