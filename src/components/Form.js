@@ -1,22 +1,20 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { DateTime } from 'luxon';
-import { Calendar } from 'primereact/calendar';
-import { SelectButton } from 'primereact/selectbutton';
-import { InputNumber } from 'primereact/inputnumber';
-import { Button } from 'primereact/button';
+import { useState } from "react";
+import { DateTime } from "luxon";
+import { Calendar } from "primereact/calendar";
+import { SelectButton } from "primereact/selectbutton";
+import { InputNumber } from "primereact/inputnumber";
+import { Button } from "primereact/button";
 
-import { addStatusPointsRequest } from '../reducers/statusPoints';
+import useSavePoints from "../apis/useSavePoints";
 
 const Form = () => {
     const [date, setDate] = useState(undefined);
     const [type, setType] = useState(undefined);
     const [points, setPoints] = useState(undefined);
-
-    const dispatch = useDispatch();
+    const savePoints = useSavePoints();
 
     const addStatusPoints = () => {
-        dispatch(addStatusPointsRequest({ date, type, points }));
+        savePoints({ date, type, points });
         clearForm();
     };
 
