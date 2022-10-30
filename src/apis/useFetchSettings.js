@@ -10,8 +10,6 @@ const useFetchSettings = () => {
     const client = useDynamoDbClient();
 
     useEffect(() => {
-        console.info("Fetch Settings");
-
         (async () => {
             const { Item } = await client.current.send(new GetCommand({
                 TableName: "status-points-settings",

@@ -5,8 +5,6 @@ import useFetchSettings from "../apis/useFetchSettings";
 import useFetchPoints from "../apis/useFetchPoints";
 
 const Page = () => {
-  console.info("Loading Page");
-
   useFetchSettings();
   useFetchPoints();
 

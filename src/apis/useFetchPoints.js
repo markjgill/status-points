@@ -17,8 +17,6 @@ const useFetchPoints = () => {
 ;
     useEffect(() => {
         (async () => {
-            console.info("Fetch Status Points");
-
             const { Items } = await client.current.send(new QueryCommand({
                 TableName: "status-points-points",
                 ExpressionAttributeValues: {
