@@ -1,13 +1,18 @@
-import { useSelector } from 'react-redux';
-import { always, cond, equals, T } from 'ramda';
-import { Card } from 'primereact/card';
+import { useSelector } from "react-redux";
+import { always, cond, equals, T } from "ramda";
+import { Card } from "primereact/card";
+
+import useTotalCurrentPoints from "../utils/useTotalCurrentPoints";
+import useCurrentTier from "../utils/useCurrentTier";
+import usePointsAfterTierReached from "../utils/usePointsAfterTierReached";
 
 const Message = () => {
-    const currentPoints = useSelector(state => state.statusPoints.currentPoints);
-    const currentTier = useSelector(state => state.statusPoints.currentTier);
-    const pointsAfterTierReached = useSelector(state => state.statusPoints.pointsAfterTierReached);
     const retention = useSelector(state => state.settings.retention);
     const points = useSelector(state => state.settings.points);
+
+    const currentPoints = useTotalCurrentPoints();
+    const currentTier = useCurrentTier();
+    const pointsAfterTierReached = usePointsAfterTierReached();
 
     const nextTier = cond([
         [equals("silver"), always("gold")],

@@ -1,15 +1,19 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { always, cond, gte, T, __ } from 'ramda';
-import { Card } from 'primereact/card';
-import { ProgressBar } from 'primereact/progressbar';
+import { useSelector } from "react-redux";
+import { always, cond, gte, T, __ } from "ramda";
+import { Card } from "primereact/card";
+import { ProgressBar } from "primereact/progressbar";
+
+import useTotalCurrentPoints from "../utils/useTotalCurrentPoints";
+import usePointsAfterTierReached from "../utils/usePointsAfterTierReached";
+import useCurrentTier from "../utils/useCurrentTier";
 
 const PointsSummary = () => {
-    const currentPoints = useSelector(state => state.statusPoints.currentPoints);
-    const pointsAfterTierReached = useSelector(state => state.statusPoints.pointsAfterTierReached);
-    const currentTier = useSelector(state => state.statusPoints.currentTier);
     const retention = useSelector(state => state.settings.retention);
     const points = useSelector(state => state.settings.points);
+
+    const currentPoints = useTotalCurrentPoints();
+    const pointsAfterTierReached = usePointsAfterTierReached();
+    const currentTier = useCurrentTier();
 
     const { silver, gold, elite } = points;
     const nextTier = cond([
