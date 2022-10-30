@@ -20,7 +20,7 @@ const useSavePoints = () => {
             }
         }));
 
-        dispatch(addStatusPointsSuccess({ date, type, points }));
+        dispatch(addStatusPointsSuccess({ date: date.toISODate(), type, points }));
     };
 };
 
