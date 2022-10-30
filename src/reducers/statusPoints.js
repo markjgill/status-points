@@ -20,7 +20,7 @@ const statusPointsSlice = createSlice({
         },
         fetchStatusPointsRequest: (state, action) => {},
         fetchStatusPointsSuccess: (state, action) => {
-            state.statusPoints = sortByDate(action.payload);
+            state.statusPoints = action.payload;
         },
         setCurrentPoints: (state, action) => {
             state.currentPoints = action.payload;

@@ -8,18 +8,19 @@ import Contents from "./Contents";
 import SettingsSidebar from "./SettingsSidebar";
 import useFetchSettings from "../apis/useFetchSettings";
 import {
-  fetchStatusPointsRequest,
   setCurrentPoints,
   setCurrentTier,
   setTierReachedDate,
   setPointsAfterTierReached
 } from "../reducers/statusPoints";
+import useFetchPoints from "../apis/useFetchPoints";
 
 const Page = () => {
   console.info("Loading Page");
 
   const dispatch = useDispatch();
   useFetchSettings();
+  useFetchPoints();
 
   const statusPoints = useSelector(state => state.statusPoints.statusPoints);
   const points = useSelector(state => state.settings.points);
@@ -57,10 +58,6 @@ const Page = () => {
   const pointsAfterTierReached = statusPoints.filter(({ date }) => tierReachedDateToToday.contains(date))
     .map(({ points }) => points)
     .reduce((acc, val) => acc + val, 0);
-
-  useEffect(() => {
-    dispatch(fetchStatusPointsRequest());
-  }, [dispatch]);
 
   useEffect(() => {
     dispatch(setCurrentPoints(currentPoints));
