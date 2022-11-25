@@ -21,7 +21,7 @@ const useFetchPoints = () => {
                 TableName: "status-points-points",
                 ExpressionAttributeValues: {
                     ":email": { S: email },
-                    ":from": { S: DateTime.now().startOf("day").minus({ months: 15 }).toISODate() }
+                    ":from": { S: DateTime.now().startOf("day").minus({ months: 18 }).toISODate() }
                 },
                 KeyConditionExpression: "email = :email and earnedDate >= :from"
             }));
