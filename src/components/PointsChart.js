@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { DateTime, Interval } from 'luxon';
-import { add, compose, groupBy, keys, map, mapObjIndexed, prop, reduce, values } from 'ramda';
+import { add, compose, filter, groupBy, keys, map, mapObjIndexed, prop, reduce, values } from 'ramda';
 import { Card } from 'primereact/card';
 import { Chart } from 'primereact/chart';
 
@@ -8,13 +8,16 @@ const PointsChart = () => {
     const statusPoints = useSelector(state => state.statusPoints.statusPoints);
 
     const endOfToday = DateTime.now().endOf("day");
+    const nextYear = endOfToday.plus({ years: 1 });
     const lastTwelveMonths = Interval.fromDateTimes(endOfToday.minus({ months: 12 }), endOfToday);
+    const lastFifteenMonths = Interval.fromDateTimes(endOfToday.minus({ months: 15 }), nextYear);
 
     const statusPointsByDate = compose(
         mapObjIndexed(value => ({
             opacity: lastTwelveMonths.contains(DateTime.fromISO(value[0].date)) ? 1.0 : 0.25,
             ...groupBy(prop("type"), value)
         })),
+        filter(value => lastFifteenMonths.contains(DateTime.fromISO(value[0].date))),
         groupBy(({ date }) => DateTime.fromISO(date).toLocaleString(DateTime.DATE_MED)),
     )(statusPoints);
 
