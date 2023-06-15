@@ -37,10 +37,17 @@ const PointsSummary = () => {
                     </div>
                 </div>
                 {
-                    currentTier !== "none"
+                    currentTier !== "none" && retentionPercentage < 100
                         ? <div className="m-2">
                             <ProgressBar className="h-2rem" value={retentionPercentage} showValue={false} color="rgb(150, 150, 150)"></ProgressBar>
                             <h4 className="m-1 text-right">{Math.trunc(pointsAfterTierReached)} out of {Math.trunc(points[currentTier] * (retention / 100))}</h4>
+                          </div>
+                        : null
+                }
+                {
+                    currentTier !== "none" && retentionPercentage >= 100
+                        ? <div className="m-2">
+                            <h3 className="text-center">You have retained {currentTier} status</h3> 
                           </div>
                         : null
                 }

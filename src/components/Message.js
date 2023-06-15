@@ -21,13 +21,20 @@ const Message = () => {
         [T, always("silver")]
     ])(currentTier);
 
-    const tierMessage = `You are ${points[nextTier] - Math.trunc(currentPoints)} points away from ${nextTier} status`;
-    const retentionMessage = `and ${points[currentTier] * (retention / 100) - Math.trunc(pointsAfterTierReached)} points away from retaining ${currentTier} status`;
+    const pointsToReachNextTier = points[nextTier] - Math.trunc(currentPoints);
+    const pointsToRetainCurrentTier = points[currentTier] * (retention / 100) - Math.trunc(pointsAfterTierReached);
+
+    const tierMessage = `You are ${pointsToReachNextTier} points away from ${nextTier} status`;
+    const retentionMessage = `and ${pointsToRetainCurrentTier} points away from retaining ${currentTier} status`;
 
     return (
         <Card className="border-1 bg-green-200">
             <h4 className="m-0 text-center">{tierMessage}</h4>
-            { currentTier !== "none" ? <h4 className="m-0 text-center">{retentionMessage}</h4> : null}
+            { 
+                currentTier !== "none" && pointsToRetainCurrentTier > 0
+                    ? <h4 className="m-0 text-center">{retentionMessage}</h4>
+                    : null
+            }
         </Card>
    );
 };
