@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { DateTime } from 'luxon';
 import { Sidebar } from 'primereact/sidebar';
 import { InputNumber } from 'primereact/inputnumber';
 import { Button } from 'primereact/button';
+import { Calendar } from 'primereact/calendar';
 
 import { sidebarVisibility, updateSettings } from '../reducers/settings';
 
@@ -41,7 +43,7 @@ const SettingsSidebar = () => {
                 <div className="flex-auto">
                     <div className="field">
                         <label htmlFor="tierReview">Tier review month</label>
-                        <Calendar id="tierReview" className="w-full" value={tierReview} onValueChange={({ value }) => setTierReview(value)} view="month" dateFormat="MM" />
+                        <Calendar id="tierReview" className="w-full" value={tierReview} onChange={({ value }) => setTierReview(DateTime.fromJSDate(value))} view="month" dateFormat="MM" />
                     </div>
                     <div className="field">
                         <label htmlFor="silver">Points to achieve Silver Status</label>
