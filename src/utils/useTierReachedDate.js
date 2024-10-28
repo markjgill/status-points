@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { compose, defaultTo, find, pluck, prop, map } from "ramda";
+import { compose, defaultTo, find, pluck, prop, map, peek } from "ramda";
 import { DateTime, Interval } from "luxon";
 
 import useCurrentTier from "./useCurrentTier";
@@ -14,6 +14,7 @@ const useTierReachedDate = () => {
         defaultTo(DateTime.fromMillis(0)),
         prop("date"),
         find(({ pointsToDate }) => pointsToDate >= points[currentTier]),
+        peek(obj => console.info(obj)),
         map(date => ({
           date,
           pointsToDate: statusPoints.filter(({ date: d }) =>
