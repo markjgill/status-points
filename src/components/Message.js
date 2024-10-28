@@ -3,8 +3,8 @@ import { always, cond, equals, T } from "ramda";
 import { Card } from "primereact/card";
 
 import useTotalCurrentPoints from "../utils/useTotalCurrentPoints";
+import usePointsAfterTierReview from "../utils/usePointsSinceTierReview";
 import useCurrentTier from "../utils/useCurrentTier";
-import usePointsAfterTierReached from "../utils/usePointsAfterTierReached";
 
 const Message = () => {
     const retention = useSelector(state => state.settings.retention);
@@ -12,7 +12,7 @@ const Message = () => {
 
     const currentPoints = useTotalCurrentPoints();
     const currentTier = useCurrentTier();
-    const pointsAfterTierReached = usePointsAfterTierReached();
+    const pointsAfterTierReview = usePointsAfterTierReview();
 
     const nextTier = cond([
         [equals("silver"), always("gold")],
@@ -22,7 +22,7 @@ const Message = () => {
     ])(currentTier);
 
     const pointsToReachNextTier = points[nextTier] - Math.trunc(currentPoints);
-    const pointsToRetainCurrentTier = points[currentTier] * (retention / 100) - Math.trunc(pointsAfterTierReached);
+    const pointsToRetainCurrentTier = points[currentTier] * (retention / 100) - Math.trunc(pointsAfterTierReview);
 
     const tierMessage = `You are ${pointsToReachNextTier} points away from ${nextTier} status`;
     const retentionMessage = `and ${pointsToRetainCurrentTier} points away from retaining ${currentTier} status`;

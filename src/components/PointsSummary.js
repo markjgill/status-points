@@ -4,7 +4,7 @@ import { Card } from "primereact/card";
 import { ProgressBar } from "primereact/progressbar";
 
 import useTotalCurrentPoints from "../utils/useTotalCurrentPoints";
-import usePointsAfterTierReached from "../utils/usePointsAfterTierReached";
+import usePointsAfterTierReview from "../utils/usePointsSinceTierReview";
 import useCurrentTier from "../utils/useCurrentTier";
 
 const PointsSummary = () => {
@@ -12,7 +12,7 @@ const PointsSummary = () => {
     const points = useSelector(state => state.settings.points);
 
     const currentPoints = useTotalCurrentPoints();
-    const pointsAfterTierReached = usePointsAfterTierReached();
+    const pointsAfterTierReview = usePointsAfterTierReview();
     const currentTier = useCurrentTier();
 
     const { silver, gold, elite } = points;
@@ -24,7 +24,7 @@ const PointsSummary = () => {
     ])(currentPoints);
 
     const nextTierPercentage = (Math.trunc(currentPoints) / nextTier) * 100;
-    const retentionPercentage = (Math.trunc(pointsAfterTierReached) / (Math.trunc(points[currentTier] * (retention / 100)))) * 100;
+    const retentionPercentage = (Math.trunc(pointsAfterTierReview) / (Math.trunc(points[currentTier] * (retention / 100)))) * 100;
 
     return (
         <Card className="border-1">
@@ -40,7 +40,7 @@ const PointsSummary = () => {
                     currentTier !== "none" && retentionPercentage < 100
                         ? <div className="m-2">
                             <ProgressBar className="h-2rem" value={retentionPercentage} showValue={false} color="rgb(150, 150, 150)"></ProgressBar>
-                            <h4 className="m-1 text-right">{Math.trunc(pointsAfterTierReached)} out of {Math.trunc(points[currentTier] * (retention / 100))}</h4>
+                            <h4 className="m-1 text-right">{Math.trunc(pointsAfterTierReview)} out of {Math.trunc(points[currentTier] * (retention / 100))}</h4>
                           </div>
                         : null
                 }
