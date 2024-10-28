@@ -15,6 +15,10 @@ const PointsSummary = () => {
     const pointsAfterTierReached = usePointsAfterTierReached();
     const currentTier = useCurrentTier();
 
+    console.info(currentPoints);
+    console.info(pointsAfterTierReached);
+    console.info(currentTier);
+
     const { silver, gold, elite } = points;
     const nextTier = cond([
         [gte(__, elite), always(Infinity)],
@@ -25,6 +29,9 @@ const PointsSummary = () => {
 
     const nextTierPercentage = (Math.trunc(currentPoints) / nextTier) * 100;
     const retentionPercentage = (Math.trunc(pointsAfterTierReached) / (Math.trunc(points[currentTier] * (retention / 100)))) * 100;
+
+    console.info(nextTierPercentage);
+    console.info(retentionPercentage);
 
     return (
         <Card className="border-1">
