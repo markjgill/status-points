@@ -16,8 +16,8 @@ const useFetchSettings = () => {
                 Key: { "id": 0 }
             }));
 
-            const { silver, gold, elite, retention } = Item;
-            dispatch(fetchSettingsSuccess({ silver, gold, elite, retention }));
+            const { silver, gold, elite, retention, review } = Item;
+            dispatch(fetchSettingsSuccess({ silver, gold, elite, retention, review }));
         })();
     }, [dispatch, client]);
 };

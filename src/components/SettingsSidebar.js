@@ -7,19 +7,21 @@ import { Button } from 'primereact/button';
 import { sidebarVisibility, updateSettings } from '../reducers/settings';
 
 const SettingsSidebar = () => {
+    const [tierReview, setTierReview] = useState();
     const [silver, setSilver] = useState();
     const [gold, setGold] = useState();
     const [elite, setElite] = useState();
     const [tierRetention, setTierRetention] = useState();
 
-    const { visible, retention, points } = useSelector(state => state.settings);
+    const { visible, review, retention, points } = useSelector(state => state.settings);
 
     useEffect(() => {
         setSilver(points.silver);
         setGold(points.gold);
         setElite(points.elite);
         setTierRetention(retention);
-    }, [points, retention]);
+        setTierReview(review);
+    }, [points, retention, review]);
 
     const dispatch = useDispatch();
 
@@ -28,7 +30,7 @@ const SettingsSidebar = () => {
     };
 
     const saveSettings = () => {
-        dispatch(updateSettings({ tierRetention, silver, gold, elite }));
+        dispatch(updateSettings({ tierReview, tierRetention, silver, gold, elite }));
         hideSidebar();
     };
 
@@ -37,6 +39,10 @@ const SettingsSidebar = () => {
             <div className="flex flex-column h-full">
                 <h2>Settings</h2>
                 <div className="flex-auto">
+                    <div className="field">
+                        <label htmlFor="tierReview">Tier review month</label>
+                        <Calendar id="tierReview" className="w-full" value={tierReview} onValueChange={({ value }) => setTierReview(value)} view="month" dateFormat="MM" />
+                    </div>
                     <div className="field">
                         <label htmlFor="silver">Points to achieve Silver Status</label>
                         <InputNumber id="silver" className="w-full" value={silver} onValueChange={({ value }) => setSilver(value)} />
