@@ -44,21 +44,17 @@ const PointsSummary = () => {
                         <h4 className="m-1 text-right">{Math.trunc(currentPoints)} out of {nextTierPoints}</h4>
                     </div>
                 </div>
-                {
-                    currentTier !== "none" && retentionPercentage < 100
-                        ? (
-                            <div className="m-2">
-                                <h4 className="m-1">To retain {currentTier} status...</h4>
-                                <ProgressBar className="h-2rem" value={retentionPercentage} showValue={false} color={color}></ProgressBar>
-                                <h4 className="m-1 text-right">{Math.trunc(pointsAfterTierReview)} out of {Math.trunc(points[currentTier] * (retention / 100))}</h4>
-                            </div>
-                        )
-                        : (
-                            <div className="m-2">
-                                <h3 className="text-center">You have retained {currentTier} status</h3> 
-                            </div>
-                        )
-                }
+                <div className="m-2">
+                    <h4 className="m-1">
+                        {
+                            currentTier !== "none" && retentionPercentage < 100
+                                ? `To retain ${currentTier} status...`
+                                : `You have retained ${currentTier} status...`
+                        }
+                    </h4>
+                    <ProgressBar className="h-2rem" value={retentionPercentage} showValue={false} color={color}></ProgressBar>
+                    <h4 className="m-1 text-right">{Math.trunc(pointsAfterTierReview)} out of {Math.trunc(points[currentTier] * (retention / 100))}</h4>
+                </div>
             </div>
         </Card>
     );
