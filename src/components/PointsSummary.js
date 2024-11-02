@@ -18,9 +18,9 @@ const PointsSummary = () => {
     const { silver, gold, elite } = points;
     const { nextTier, color, nextTierColor } = cond([
         [gte(__, elite), always({ nextTier: Infinity, color: 'rgb(150, 150, 150)', nextTierColor: 'rgb(150, 150, 150)' })],
-        [gte(__, gold), always(({ nextTier: elite, color: 'rgb(150, 150, 150)', nextTierColor: 'rgb(150, 150, 150)' }))],
-        [gte(__, silver), always(({ nextTier: gold, color: 'rgb(255, 215, 0)', nextTierColor: 'rgb(150, 150, 150)' }))],
-        [T, always(({ nextTier: silver, color: 'rgb(192, 192, 192)', nextTierColor: 'rgb(255, 215, 0)' }))]
+        [gte(__, gold), always(({ nextTier: elite, color: 'rgb(255, 215, 0)', nextTierColor: 'rgb(150, 150, 150)' }))],
+        [gte(__, silver), always(({ nextTier: gold, color: 'rgb(192, 192, 192)', nextTierColor: 'rgb(255, 215, 0)' }))],
+        [T, always(({ nextTier: silver, color: 'rgb(0, 186, 107)', nextTierColor: 'rgb(192, 192, 192)' }))]
     ])(currentPoints);
 
     const nextTierPercentage = (Math.trunc(currentPoints) / nextTier) * 100;
