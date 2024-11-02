@@ -58,7 +58,7 @@ const PointsChart = () => {
     return (
         <Card className="border-1">
             <div className="flex flex-column">
-                <h2 className="flex justify-content-center">Points Chart</h2>
+                <h2 className="flex justify-content-center m-1">Points Chart</h2>
                 <Chart type="bar" data={data} options={options} />
             </div>
         </Card>

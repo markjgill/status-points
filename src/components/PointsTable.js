@@ -16,7 +16,7 @@ const PointsTable = () => {
     return (
         <Card className="border-1">
             <div className="flex flex-column">
-                <h2 className="flex justify-content-center">Points</h2>
+                <h2 className="flex justify-content-center m-1">Points</h2>
                 <DataTable value={data} paginator stripedRows paginatorTemplate="PrevPageLink PageLinks NextPageLink" rows={10}>
                     <Column field="date" header="Date"></Column>
                     <Column field="type" header="Type"></Column>
