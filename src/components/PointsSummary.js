@@ -16,11 +16,11 @@ const PointsSummary = () => {
     const currentTier = useCurrentTier();
 
     const { silver, gold, elite } = points;
-    const nextTier = cond([
-        [gte(__, elite), always(Infinity)],
-        [gte(__, gold), always(elite)],
-        [gte(__, silver), always(gold)],
-        [T, always(silver)]
+    const { nextTier, color, nextTierColor } = cond([
+        [gte(__, elite), always({ nextTier: Infinity, color: 'rgb(150, 150, 150)', nextTierColor: 'rgb(150, 150, 150)' })],
+        [gte(__, gold), always(({ nextTier: elite, color: 'rgb(150, 150, 150)', nextTierColor: 'rgb(150, 150, 150)' }))],
+        [gte(__, silver), always(({ nextTier: gold, color: 'rgb(255, 215, 0)', nextTierColor: 'rgb(150, 150, 150)' }))],
+        [T, always(({ nextTier: silver, color: 'rgb(192, 192, 192)', nextTierColor: 'rgb(255, 215, 0)' }))]
     ])(currentPoints);
 
     const nextTierPercentage = (Math.trunc(currentPoints) / nextTier) * 100;
@@ -32,14 +32,14 @@ const PointsSummary = () => {
                 <h2 className="flex justify-content-center">Points Summary</h2>
                 <div className="m-2">
                     <div>
-                        <ProgressBar className="h-2rem" value={nextTierPercentage} showValue={false} color="rgb(255, 215, 0)"></ProgressBar>
+                        <ProgressBar className="h-2rem" value={nextTierPercentage} showValue={false} color={nextTierColor}></ProgressBar>
                         <h4 className="m-1 text-right">{Math.trunc(currentPoints)} out of {nextTier}</h4>
                     </div>
                 </div>
                 {
                     currentTier !== "none" && retentionPercentage < 100
                         ? <div className="m-2">
-                            <ProgressBar className="h-2rem" value={retentionPercentage} showValue={false} color="rgb(150, 150, 150)"></ProgressBar>
+                            <ProgressBar className="h-2rem" value={retentionPercentage} showValue={false} color={color}></ProgressBar>
                             <h4 className="m-1 text-right">{Math.trunc(pointsAfterTierReview)} out of {Math.trunc(points[currentTier] * (retention / 100))}</h4>
                           </div>
                         : null
