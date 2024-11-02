@@ -17,8 +17,8 @@ const PointsSummary = () => {
 
     const { silver, gold, elite } = points;
     const { nextTierPoints, color, nextTierColor } = cond([
-        [gte(__, elite), always({ nextTierPoints: Infinity, color: 'rgb(150, 150, 150)', nextTierColor: 'rgb(150, 150, 150)' })],
-        [gte(__, gold), always(({ nextTierPoints: elite, color: 'rgb(255, 215, 0)', nextTierColor: 'rgb(150, 150, 150)' }))],
+        [gte(__, elite), always({ nextTierPoints: Infinity, color: 'rgb(224, 211, 181)', nextTierColor: 'rgb(224, 211, 181)' })],
+        [gte(__, gold), always(({ nextTierPoints: elite, color: 'rgb(255, 215, 0)', nextTierColor: 'rgb(224, 211, 181)' }))],
         [gte(__, silver), always(({ nextTierPoints: gold, color: 'rgb(192, 192, 192)', nextTierColor: 'rgb(255, 215, 0)' }))],
         [T, always(({ nextTierPoints: silver, color: 'rgb(0, 186, 107)', nextTierColor: 'rgb(192, 192, 192)' }))]
     ])(currentPoints);
