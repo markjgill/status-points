@@ -23,7 +23,7 @@ const TypeSummary = () => {
     return (
         <Card className="border-1">
             <div className="flex flex-column">
-                <h2 className="flex justify-content-center">Flights vs Card</h2>
+                <h2 className="flex justify-content-center m-1">Flights vs Card</h2>
                 <div className="flex justify-content-center">
                     <Knob value={value.toFixed(2)} valueColor={"rgb(0, 255, 0)"} rangeColor={"rgb(255, 0, 0)"} valueTemplate={"{value}%"} readOnly />
                 </div>

@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { always, cond, gte, T, __ } from "ramda";
+import { always, cond, equals, gte, T, __ } from "ramda";
 import { Card } from "primereact/card";
 import { ProgressBar } from "primereact/progressbar";
 
@@ -36,7 +36,7 @@ const PointsSummary = () => {
     return (
         <Card className="border-1">
             <div className="flex flex-column">
-                <h2 className="flex justify-content-center">Points Summary</h2>
+                <h2 className="flex justify-content-center m-1">Points Summary</h2>
                 <div className="m-2">
                     <div>
                         <h4 className="m-1">To achieve {nextTier} status...</h4>
@@ -46,14 +46,18 @@ const PointsSummary = () => {
                 </div>
                 {
                     currentTier !== "none" && retentionPercentage < 100
-                        ? <div className="m-2">
-                            <h4 className="m-1">To retain {currentTier} status...</h4>
-                            <ProgressBar className="h-2rem" value={retentionPercentage} showValue={false} color={color}></ProgressBar>
-                            <h4 className="m-1 text-right">{Math.trunc(pointsAfterTierReview)} out of {Math.trunc(points[currentTier] * (retention / 100))}</h4>
-                          </div>
-                        : <div className="m-2">
-                            <h3 className="text-center">You have retained {currentTier} status</h3> 
-                          </div>
+                        ? (
+                            <div className="m-2">
+                                <h4 className="m-1">To retain {currentTier} status...</h4>
+                                <ProgressBar className="h-2rem" value={retentionPercentage} showValue={false} color={color}></ProgressBar>
+                                <h4 className="m-1 text-right">{Math.trunc(pointsAfterTierReview)} out of {Math.trunc(points[currentTier] * (retention / 100))}</h4>
+                            </div>
+                        )
+                        : (
+                            <div className="m-2">
+                                <h3 className="text-center">You have retained {currentTier} status</h3> 
+                            </div>
+                        )
                 }
             </div>
         </Card>
