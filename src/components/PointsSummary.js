@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { always, cond, equals, gte, T, __ } from "ramda";
+import { always, cond, gte, T, __ } from "ramda";
 import { Card } from "primereact/card";
 import { ProgressBar } from "primereact/progressbar";
 
@@ -23,13 +23,6 @@ const PointsSummary = () => {
         [T, always(({ nextTierPoints: silver, color: 'rgb(0, 186, 107)', nextTierColor: 'rgb(192, 192, 192)' }))]
     ])(currentPoints);
 
-    const nextTier = cond([
-        [equals("silver"), always("gold")],
-        [equals("gold"), always("elite")],
-        [equals("elite"), always("elite")],
-        [T, always("silver")]
-    ])(currentTier);
-
     const nextTierPercentage = (Math.trunc(currentPoints) / nextTierPoints) * 100;
     const retentionPercentage = (Math.trunc(pointsAfterTierReview) / (Math.trunc(points[currentTier] * (retention / 100)))) * 100;
 
@@ -37,23 +30,21 @@ const PointsSummary = () => {
         <Card className="border-1">
             <div className="flex flex-column">
                 <h2 className="flex justify-content-center m-1">Points Summary</h2>
-                <div className="m-2">
+                <div className="m-3">
                     <div>
-                        <h4 className="m-1">To achieve {nextTier} status...</h4>
                         <ProgressBar className="h-2rem" value={nextTierPercentage} showValue={false} color={nextTierColor}></ProgressBar>
-                        <h4 className="m-1 text-right">{Math.trunc(currentPoints)} out of {nextTierPoints}</h4>
+                        <div className="flex justify-content-between">
+                            <h4 className="my-1 mx-0">{Math.trunc(currentPoints)} out of {nextTierPoints}</h4>
+                            <h4 className="my-1 mx-0">{nextTierPoints - Math.trunc(currentPoints)} remaining</h4>
+                        </div>
                     </div>
                 </div>
-                <div className="m-2">
-                    <h4 className="m-1">
-                        {
-                            currentTier !== "none" && retentionPercentage < 100
-                                ? `To retain ${currentTier} status...`
-                                : `You have retained ${currentTier} status...`
-                        }
-                    </h4>
+                <div className="m-3">
                     <ProgressBar className="h-2rem" value={retentionPercentage} showValue={false} color={color}></ProgressBar>
-                    <h4 className="m-1 text-right">{Math.trunc(pointsAfterTierReview)} out of {Math.trunc(points[currentTier] * (retention / 100))}</h4>
+                    <div className="flex justify-content-between">
+                        <h4 className="my-1 mx-0">{Math.trunc(pointsAfterTierReview)} out of {Math.trunc(points[currentTier] * (retention / 100))}</h4>
+                        <h4 className="my-1 mx-0">{Math.trunc(points[currentTier] * (retention / 100)) - Math.trunc(pointsAfterTierReview)} remaining</h4>
+                    </div>
                 </div>
             </div>
         </Card>

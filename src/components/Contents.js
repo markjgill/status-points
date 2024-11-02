@@ -5,7 +5,7 @@ import PointsTable from "./PointsTable";
 import Message from "./Message";
 
 const Contents = () => (
-    <div className="flex flex-column md:flex-row mx-1">
+    <div className="flex flex-column md:flex-row m-1">
         <div className="flex flex-column justify-content-between">
             <div className="m-2">
                 <Message />
