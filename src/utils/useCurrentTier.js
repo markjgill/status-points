@@ -7,12 +7,14 @@ const useCurrentTier = () => {
     const { silver, gold, elite } = useSelector(state => state.settings.points);
     const currentPoints = useTotalCurrentPoints();
 
-    return cond([
-        [gte(__, elite), always("eiite")],
-        [gte(__, gold), always("gold")],
-        [gte(__, silver), always("silver")],
-        [T, always("none")]
-      ])(currentPoints);
+    return "gold";
+
+    // return cond([
+    //     [gte(__, elite), always("eiite")],
+    //     [gte(__, gold), always("gold")],
+    //     [gte(__, silver), always("silver")],
+    //     [T, always("none")]
+    //   ])(currentPoints);
 };
 
 export default useCurrentTier;
